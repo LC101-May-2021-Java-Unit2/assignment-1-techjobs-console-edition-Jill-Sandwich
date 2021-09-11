@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -99,7 +96,19 @@ public class JobData {
         loadData();
 
         // TODO - implement this method
-        return null;
+        //Empty arraylist bucket to be populated later in the code
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        //iterates through the arraylist
+        for (HashMap<String, String> job: allJobs){
+            for (Map.Entry<String, String> jobPair: job.entrySet()){
+                String jobValue = jobPair.getValue();
+                //we want to add the job HashMap<k,v> inside the arraylist
+                if (jobValue.contains(value) && !jobs.contains(jobValue)){
+                    jobs.add(job);
+                }
+            }
+        }
+        return jobs;
     }
 
     /**
